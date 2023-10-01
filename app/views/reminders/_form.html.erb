@@ -1,0 +1,41 @@
+<%= form_with(model: reminder, local: true) do |form| %>
+  <% if reminder.errors.any? %>
+    <div id="error_explanation" class="panel panel-danger">
+      <h2><%= pluralize(reminder.errors.count, "error") %> prohibited this reminder from being saved:</h2>
+
+      <ul>
+      <% reminder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_field :description, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :time %>
+
+    <div class="col-lg-2">
+      <%= time_select :reminder, :time ,{:class => "form-control" } %>
+    </div>
+    <div class="col-lg-4">
+      <%= date_select :reminder, :time, {:class => "form-control" } %>
+    </div>
+    <div class="col-lg-2">
+      <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, default: "UTC", class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>This is a reminder for you, <%= @reminder.title %></h1>
+    <p>
+      <%= @reminder.description %><br>
+    </p>
+    <p>
+      To check the reminder, just follow this link: <%= reminder_url(@reminder) %>.
+    </p>
+    <p>Have a great day!</p>
+  </body>
+</html>

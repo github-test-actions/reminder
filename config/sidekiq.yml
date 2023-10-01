@@ -1,0 +1,10 @@
+---
+:verbose: true
+development:
+  :concurrency: 1
+production:
+  :concurrency: 20
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:queues:
+  - [high_priority, 2]

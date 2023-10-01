@@ -1,0 +1,23 @@
+type: Array
+items:
+  type: Object
+  required:
+    - title
+    - discription
+    - time
+    - time_zone
+    - user_id
+    - jobid
+  properties:
+    title:
+      type: string
+    discription:
+      type: string
+    time:
+      type: datetime
+    time_zone:
+      type: string
+    user_id:
+      type: integer
+    jobid:
+      type: string
