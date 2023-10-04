@@ -4,7 +4,7 @@ on:
     workflows: [Repository Events]
     types: [completed]
     branches:
-      - master
+      - test
 
 jobs:
   echo-string:

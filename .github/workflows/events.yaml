@@ -7,7 +7,6 @@ on:
     paths:
       - "**.js"
 
-      
 jobs:
   checkout-test:
     runs-on: ubuntu-latest
