@@ -2,12 +2,12 @@ name: Manually Triggered
 on:
   workflow_dispatch:
     inputs:
-      string12:
+      string:
         description: A string input
         type: string
         required: true
         default: "Default value"
-      option_tet:
+      option:
         description: "An option Input"
         type: choice
         required: true
