@@ -1,5 +1,11 @@
 name: Repository Events
-on: [push, pull_request, issues]
+on: 
+  push:
+    branches:
+      - master
+      - "feature/*"
+    paths:
+      - "**.js"
 
 jobs:
   checkout-test:
