@@ -6,7 +6,8 @@ env:
 
 jobs:
   env-vars-and-context:
-    runs-on: ubuntu-latest
+    runs-on: ${{ vars.JOB_RUNNER }}
+    environment: production
     if: github.ref == 'refs/heads/master'
     env:
       JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
@@ -27,4 +28,6 @@ jobs:
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
           echo ${{env.NEW_ENV_VAR}}
+          echo ${{ vars.JOB_RUNNER }}
+          echo ${{ secrets.BOOLEAN_SECRET }}
 
