@@ -17,6 +17,7 @@ jobs:
       - name: Log Context
         run: echo ${{ github.ref }}
       - name: write env var into guithub file
+        id: habib
         run: |
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
@@ -24,7 +25,7 @@ jobs:
         env:
           BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
       - name: Log Custom Env Var
-        if: ${{ env.BOOLEAN_SECRET }} == 'false'
+        if: ${{ steps.habib.BOOLEAN_SECRET }} == 'false'
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
