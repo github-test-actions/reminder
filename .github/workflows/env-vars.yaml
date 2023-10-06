@@ -20,7 +20,10 @@ jobs:
         run: |
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
+        env:
+          BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
       - name: Log Custom Env Var
+        if: ${{ env.BOOLEAN_SECRET }}
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
@@ -30,4 +33,5 @@ jobs:
           echo ${{env.NEW_ENV_VAR}}
           echo ${{ vars.JOB_RUNNER }}
           echo ${{ secrets.BOOLEAN_SECRET }}
+          echo $JOB_RUNNER
 
