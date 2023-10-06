@@ -19,9 +19,7 @@ jobs:
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
-          echo $CUST_ENV_VAR
           echo ${{env.CUST_ENV_VAR}}
           echo ${{env.JOB_LEVEL_ENV}}
           cho ${{env.WF_LEVEL_ENV}}
-          echo $WF_LEVEL_ENV
 
