@@ -6,7 +6,7 @@ run-name: "Ex @${{ github.actor }}, event: ${{ github.event_name }}"
 jobs:
   runs-on-issue-and-prs:
     runs-on: ubuntu-latest
-    if: contains(fromJson('["issue","pull_request"]'), github.event_name)
+    if: contains(fromJson('["issues","pull_request"]'), github.event_name)
     steps:
       - name: Run only if issue or pull_request
         run: |
