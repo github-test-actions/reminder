@@ -26,5 +26,5 @@ jobs:
           echo ${{env.CUST_ENV_VAR}}
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
-          echo $NEW_ENV_VAR
+          echo ${{env.NEW_ENV_VAR}}
 
