@@ -25,7 +25,7 @@ jobs:
         env:
           BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
       - name: Log Custom Env Var
-        if: ${{ steps.habib.BOOLEAN_SECRET }} == 'false'
+        if: ${{ steps.habib.env.BOOLEAN_SECRET }} == 'false'
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
