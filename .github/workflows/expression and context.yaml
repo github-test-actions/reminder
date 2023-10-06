@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Run only if issue or pull_request
         run: |
-          echo ${{github.event.issue.labels.*.name}}
-          echo ${{ join(github.event.issue.labels.*.name, ' ,') }}
+          echo ${{github.event.labels.*.name}}
+          echo ${{ join(github.event.labels.*.name, ' ,') }}
   using-expression-and-contexts:
     runs-on: ubuntu-latest
     steps:
