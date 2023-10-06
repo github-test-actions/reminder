@@ -15,6 +15,10 @@ jobs:
         run: echo $GITHUB_REF
       - name: Log Context
         run: echo ${{ github.ref }}
+      - name: write env var into guithub file
+        run: |
+          echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
+          echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
       - name: Log Custom Env Var
         env:
           CUST_ENV_VAR: Custome env variable
@@ -22,4 +26,5 @@ jobs:
           echo ${{env.CUST_ENV_VAR}}
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
+          echo $NEW_ENV_VAR
 
