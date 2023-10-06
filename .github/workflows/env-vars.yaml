@@ -2,7 +2,7 @@ name: Environment Variables
 on: [push]
 
 env: 
-  WF_LEVEL_ENV = Available to all jobs
+  WF_LEVEL_ENV: Available to all jobs
 
 jobs:
   env-vars-and-context:
