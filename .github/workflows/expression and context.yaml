@@ -8,12 +8,12 @@ jobs:
       - name: Expressions
         id: expression_id
         run: |
-          echo {{ 1 }}
-          echo {{ 'this is a string' }}
-          echo {{ null }}
-          echo {{ true }} 
-          echo {{ 1 > 2 }} 
-          echo {{ 'sring' == 'String' }}
+          echo ${{ 1 }}
+          echo ${{ 'this is a string' }}
+          echo ${{ null }}
+          echo ${{ true }} 
+          echo ${{ 1 > 2 }} 
+          echo ${{ 'sring' == 'String' }}
       - name: Dump context
         run: |
           echo '${{ toJson(github) }}'
