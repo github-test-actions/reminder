@@ -1,0 +1,25 @@
+name: Environment Variables
+on: [push]
+
+env: 
+  WF_LEVEL_ENV = Available to all jobs
+
+jobs:
+  env-vars-and-context:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/mater'
+    env:
+      JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
+    steps:
+      - name: Log Env Var
+        run: echo $GITGUB_REF
+      - name: Log Context
+        run: echo ${{ github.ref }}
+      - name: Log Custom Env Var
+        env:
+          CUST_ENV_VAR: Custome env variable
+        run: | 
+          echo $CUST_ENV_VAR
+          echo ${{env.CUST_ENV_VAR}}
+          echo $WF_LEVEL_ENV
+
