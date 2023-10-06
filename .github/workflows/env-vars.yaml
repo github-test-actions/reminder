@@ -23,7 +23,7 @@ jobs:
         env:
           BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
       - name: Log Custom Env Var
-        if: ${{ env.BOOLEAN_SECRET }}
+        if: ${{ env.BOOLEAN_SECRET }} == true
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
