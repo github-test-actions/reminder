@@ -8,17 +8,17 @@ jobs:
       - name: Step 1
         run: sleep 20
       - name: Step 2
-        run: echo 'Step 2'
+        run: exit
       - name: Runs on failur
         if: failure()
         run: echo 'Step 2 has filed '
       - name: Runs on  Success
         if: success()
         run: echo 'Step 2 has filed '
-      - name: Runs on failur
+      - name: Runs on Always
         if: always()
         run: echo ' Always '
-      - name: Runs on failur
+      - name: Runs on cancelled
         if: cancelled()
         run: echo ' cancelled '
   job-2:
