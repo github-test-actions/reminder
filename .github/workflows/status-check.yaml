@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Step 1
-        run: echo 'steps 1'
+        run: sleep 61
+        timeout-minutes: 1
       - name: Step 2
         id: step-2
         continue-on-error: true
