@@ -33,4 +33,5 @@ jobs:
           echo ${{ vars.ENV_LEVEL_VER }}
           echo ${{ secrets.BOOLEAN_SECRET }}
           echo $JOB_RUNNER
+          echo ${{steps.habib.outputs.BOOLEAN_SECRET}} 
 
