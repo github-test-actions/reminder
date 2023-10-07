@@ -11,10 +11,10 @@ jobs:
     env:
       JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
     steps:
-      - name: Log Env Var
+      - id: habib
+        name: Log Env Var
         run: echo $GITHUB_REF
       - name: Log Context
-        id: habib
         run: |
           echo ${{ github.ref }}
           echo "BOOLEAN_SECRET=${{ secrets.BOOLEAN_SECRET }}" >> "$GITHUB_OUTPUT"
