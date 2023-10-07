@@ -8,7 +8,6 @@ jobs:
   env-vars-and-context:
     runs-on: ${{ vars.JOB_RUNNER }}
     environment: "production"
-    if: github.ref == 'refs/heads/master'
     env:
       JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
       BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
@@ -24,11 +23,8 @@ jobs:
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
           echo "JOB_RUNNER=${{ vars.JOB_RUNNER }}" >> "$GITHUB_ENV"
       - name: Log Custom Env Var
-        if: ${{ env.BOOLEAN_SECRET }} == 'false'
-        env:
-          CUST_ENV_VAR: Custome env variable
+        if: env.BOOLEAN_SECRET == 'false'
         run: | 
-          echo ${{env.CUST_ENV_VAR}}
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
           echo ${{env.NEW_ENV_VAR}}
