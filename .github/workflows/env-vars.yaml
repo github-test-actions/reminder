@@ -1,7 +1,7 @@
 name: Environment Variables
 on: [push]
 
-env: 
+env:
   WF_LEVEL_ENV: Available to all jobs
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           echo "JOB_RUNNER=${{ vars.JOB_RUNNER }}" >> "$GITHUB_ENV"
       - name: Log Custom Env Var
         if: env.BOOLEAN_SECRET == 'false'
-        run: | 
+        run: |
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
           echo ${{env.NEW_ENV_VAR}}
@@ -32,4 +32,3 @@ jobs:
           echo ${{ vars.ENV_LEVEL_VER }}
           echo ${{ secrets.BOOLEAN_SECRET }}
           echo $JOB_RUNNER
-
