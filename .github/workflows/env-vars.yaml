@@ -33,7 +33,7 @@ jobs:
           echo ${{env.WF_LEVEL_ENV}}
           echo ${{env.NEW_ENV_VAR}}
           echo ${{ vars.JOB_RUNNER }}
-          cho ${{ vars.ENV_LEVEL_VER }}
+          echo ${{ vars.ENV_LEVEL_VER }}
           echo ${{ secrets.BOOLEAN_SECRET }}
           echo $JOB_RUNNER
 
