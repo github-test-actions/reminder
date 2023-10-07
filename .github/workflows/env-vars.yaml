@@ -10,21 +10,20 @@ jobs:
     environment: "production"
     env:
       JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
+      BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
     steps:
-      - id: habib
-        name: Log Env Var
+      - name: Log Env Var
         run: echo $GITHUB_REF
       - name: Log Context
-        run: |
-          echo ${{ github.ref }}
-          echo "BOOLEAN_SECRET=${{ secrets.BOOLEAN_SECRET }}" >> "$GITHUB_OUTPUT"
+        run: echo ${{ github.ref }}
       - name: write env var into guithub file
+        id: habib
         run: |
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
           echo "JOB_RUNNER=${{ vars.JOB_RUNNER }}" >> "$GITHUB_ENV"
       - name: Log Custom Env Var
-        if: ${{steps.habib.outputs.BOOLEAN_SECRET}} == 'false'
+        if: env.BOOLEAN_SECRET == 'false'
         run: | 
           echo ${{env.JOB_LEVEL_ENV}}
           echo ${{env.WF_LEVEL_ENV}}
@@ -33,5 +32,4 @@ jobs:
           echo ${{ vars.ENV_LEVEL_VER }}
           echo ${{ secrets.BOOLEAN_SECRET }}
           echo $JOB_RUNNER
-          echo '${{steps.habib.outputs.BOOLEAN_SECRET}}'
 
