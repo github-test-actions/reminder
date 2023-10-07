@@ -11,6 +11,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     env:
       JOB_LEVEL_ENV: Available to all steps in env-var-and-context job
+      BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
     steps:
       - name: Log Env Var
         run: echo $GITHUB_REF
@@ -22,10 +23,8 @@ jobs:
           echo "NEW_ENV_VAR=$(date)" >> "$GITHUB_ENV"
           echo "JOB_LEVEL_ENV=$RANDOM" >> "$GITHUB_ENV"
           echo "JOB_RUNNER=${{ vars.JOB_RUNNER }}" >> "$GITHUB_ENV"
-        env:
-          BOOLEAN_SECRET: ${{ secrets.BOOLEAN_SECRET }}
       - name: Log Custom Env Var
-        if: ${{ steps.habib.env.BOOLEAN_SECRET }} == 'false'
+        if: ${{ env.BOOLEAN_SECRET }} == 'false'
         env:
           CUST_ENV_VAR: Custome env variable
         run: | 
