@@ -17,9 +17,8 @@ jobs:
           - os: ubuntu-latest
             node-version: 17
         exclude:
-          - os: macos-latest
-            node-version: 16
-            experimental: true
+          - os: ubuntu-latest
+            node-version: 14
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
