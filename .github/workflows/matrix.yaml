@@ -1,4 +1,4 @@
-name: node setup
+name: matrix
 on: [push]
 
 jobs:
