@@ -19,6 +19,7 @@ jobs:
         exclude:
           - os: macos-latest
             node-version: 16
+            experimental: true
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
