@@ -1,0 +1,19 @@
+name: Concurrency 1
+run-name: Currency (${{ inputs.environemnt }})
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        type: environment
+        required: true
+
+concurrency:
+  group: ${{ github.event.inputs.environment }}
+  cancel-in-progress: true
+jobs:
+  sleep:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 30
+
