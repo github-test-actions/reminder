@@ -1,5 +1,5 @@
 name: Concurrency 1
-run-name: Currency (${{ inputs.environemnt }})
+run-name: Currency (${{ github.event.inputs.environment  }})
 on:
   workflow_dispatch:
     inputs:
