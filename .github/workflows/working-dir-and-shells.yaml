@@ -34,10 +34,9 @@ jobs:
     steps:
       - name: Display Working Directory & List Files
         run: |
+          Get-Location
           pwd
-          ls -a
-          dir
-          echo $GITHUB_SHA
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_WORKSPACE
+          echo $env:GITHUB_SHA
+          echo $env:GITHUB_REPOSITORY
+          echo $env:GITHUB_WORKSPACE
 
