@@ -35,8 +35,9 @@ jobs:
           pwd
   display-wd-info-windows:
     runs-on: Windows-latest
-    run:
-      shell: pwsh
+    defaults:
+      run:
+        shell: pwsh
     steps:
       - name: Display Working Directory & List Files
         run: |
