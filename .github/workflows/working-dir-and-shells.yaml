@@ -1,8 +1,8 @@
 name: Working dir and shells name
 on: [push]
-# defaults:
-#   run:
-#     shell: bash
+defaults:
+  run:
+    shell: bash
 
 jobs:
   # working-dir-and-shells:
@@ -29,6 +29,10 @@ jobs:
           echo $GITHUB_SHA
           echo $GITHUB_REPOSITORY
           echo $GITHUB_WORKSPACE
+      - name: Change working dir
+        working-directory: /home/runner
+        run: |
+          pwd
   display-wd-info-windows:
     runs-on: Windows-latest
     steps:
