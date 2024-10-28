@@ -26,9 +26,9 @@ jobs:
           pwd
           ls -a
           dir
-          echo $env:GITHUB_SHA
-          echo $env:GITHUB_REPOSITORY
-          echo $env:GITHUB_WORKSPACE
+          echo $GITHUB_SHA
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_WORKSPACE
   display-wd-info-windows:
     runs-on: Windows-latest
     steps:
