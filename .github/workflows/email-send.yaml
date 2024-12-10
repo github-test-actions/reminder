@@ -1,0 +1,35 @@
+name: Push to Master Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  zip-and-email:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # Step 2: Zip a specific folder
+    - name: Zip specific folder
+      run: |
+        mkdir -p zipped
+        zip -r ./zipped/locales.zip ./config/locales
+
+    # Step 3: Send an email with the zip file attached
+    - name: Send email with attachment
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.EMAIL_USERNAME }}
+        password: ${{ secrets.EMAIL_PASSWORD }}
+        subject: Git Repository Folder
+        body: "Attached is the zipped folder from the latest push to master."
+        to: salihaansar99@gmail.com
+        from: ${{ secrets.EMAIL_USERNAME }}
+        attachments: ./zipped/specific-folder.zip
