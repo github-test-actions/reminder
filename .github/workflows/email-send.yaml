@@ -25,11 +25,11 @@ jobs:
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.5
+        ruby-version: 3.0
     # Step: 3: Install dependency
     - name: Install dependency
       run: |
-        gem install bundler
+        gem install bundler -v 2.3.26
         bundle install
     # Step: 4: Run rake Task
     - name: Run Rake Task
