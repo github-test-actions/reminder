@@ -32,4 +32,4 @@ jobs:
         body: "Attached is the zipped folder from the latest push to master."
         to: salihaansar99@gmail.com
         from: ${{ secrets.EMAIL_USERNAME }}
-        attachments: ./zipped/specific-folder.zip
+        attachments: ./zipped/locales.zip
