@@ -23,8 +23,11 @@ jobs:
       run: |
         mkdir -p zipped
         zip -r ./zipped/locales.zip ./config/locales
-    - name: List Files After
-      run: ls -a
+    - name: List Files After Zip
+      run: ls -a ./zipped
+    - name: List files in the zipped folder
+      run: |
+        unzip -l ./zipped/locales.zip
 
     # Step 3: Send an email with the zip file attached
     - name: Send email with attachment
