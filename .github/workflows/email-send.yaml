@@ -17,6 +17,11 @@ jobs:
       uses: actions/checkout@v3
     - name: List Files After
       run: ls -a
+    # debug the Username and email settings
+    - name: Debug Inputs
+      run: |
+        echo "Username: ${{ secrets.EMAIL_USERNAME }}"
+        echo "From: mdhr2023@gmail.com"
 
     # Step 2: Zip a specific folder
     - name: Zip specific folder
@@ -39,6 +44,6 @@ jobs:
         password: ${{ secrets.EMAIL_PASSWORD }}
         subject: Git Repository Folder
         body: "Attached is the zipped folder from the latest push to master."
-        to: salihaansar99@gmail.com
+        to: salihaansar99@gmail.com, habib_tum@ymail.com
         from: ${{ secrets.EMAIL_USERNAME }}
         attachments: ./zipped/locales.zip
