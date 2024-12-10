@@ -22,7 +22,7 @@ jobs:
     - name: Zip specific folder
       run: |
         mkdir -p zipped
-        zip -r ./zipped/locales.zip ./reminder/config/locales
+        zip -r ./zipped/locales.zip ./config/locales
     - name: List Files After
       run: ls -a
 
