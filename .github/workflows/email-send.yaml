@@ -69,7 +69,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: found_file_name
-
+      - name: check the download file
+        runn: |
+          pwd
+          ls -la
       - name: Send email with attachment
         uses: dawidd6/action-send-mail@v3
         with:
