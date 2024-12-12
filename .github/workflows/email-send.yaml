@@ -8,55 +8,78 @@ on:
 jobs:
   zip-and-email:
     runs-on: ubuntu-latest
-
     steps:
-    # Step 1: Check out the repository
-    - name: List Files Before
-      run: ls -a
-    - name: Checkout repository
-      uses: actions/checkout@v3
-    - name: List Files After
-      run: ls -a
-    # debug the Username and email settings
-    - name: Debug Inputs
-      run: |
-        echo "Username: ${{ secrets.EMAIL_USERNAME }}"
-    # Step 2: Setup Ruby
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.5.0
-    # Step: 3: Install dependency
-    - name: Install dependency
-      run: |
-        gem install bundler -v 2.3.26
-        bundle install
-    # Step: 4: Run rake Task
-    - name: Run Rake Task
-      run: |
-        bundle exec rake task:print
-    # Step 5: Zip a specific folder
-    - name: Zip specific folder
-      run: |
-        mkdir -p zipped
-        zip -r ./zipped/locales.zip ./config/locales
-    - name: List Files After Zip
-      run: ls -a ./zipped
-    - name: List files in the zipped folder
-      run: |
-        unzip -l ./zipped/locales.zip
+      # Step 1: Check out the repository
+      - name: List Files Before
+        run: |
+          ls -a
+          pwd
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: List Files After
+        run: |
+          ls -a
+          pwd
+      # debug the Username and email settings
+      - name: Debug Inputs
+        run: |
+          echo "Username: ${{ secrets.EMAIL_USERNAME }}"
+      # Step 2: Setup Ruby
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.0
+      # Step: 3: Install dependency
+      - name: Install dependency
+        run: |
+          gem install bundler -v 2.3.26
+          bundle install
+      # Step: 4: Run rake Task
+      - name: Run Rake Task
+        run: |
+          bundle exec rake task:print
 
-    # Step 6: Send an email with the zip file attached
-    - name: Send email with attachment
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.gmail.com
-        server_port: 587
-        username: ${{ secrets.EMAIL_USERNAME }}
-        password: ${{ secrets.EMAIL_PASSWORD }}
-        subject: Git Repository Folder
-        body: "Attached is the zipped folder from the latest push to master."
-        to: salihaansar99@gmail.com
-        cc: habib_tum@ymail.com
-        from: ${{ secrets.EMAIL_USERNAME }}
-        attachments: ./zipped/locales.zip
+      # Step 5: Zip a specific folder
+      #      mkdir -p zipped
+      - name: Zip specific folder
+        run: |
+          pwd
+          zip -r ./tmp/locales.zip ./config/locales
+      - name: List Files After Zip
+        run: ls -la ./tmp
+      - name: make zip ymal
+        id: zip_file
+        run: |
+          found_file=$(ls -t ./tmp/*.zip | head -n 1)
+          echo "found_file=${found_file}" >> $GITHUB_ENV
+
+      - name: Upload latest file
+        uses: actions/upload-artifact@v3
+        with:
+          name: found_file_name
+          path: ${{ env.found_file }}
+
+  just-email:
+    needs: zip-and-email
+    name: check name just email
+    runs-on: ubuntu-latest
+    steps:
+      # Step 6: Send an email with the zip file attached
+      - name: Download latest file
+        uses: actions/download-artifact@v3
+        with:
+          name: found_file_name
+
+      - name: Send email with attachment
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: Git Repository Folder
+          body: "Attached is the zipped folder from the latest push to master."
+          to: salihaansar99@gmail.com
+          cc: habib_tum@ymail.com
+          from: ${{ secrets.EMAIL_USERNAME }}
+          attachments: found_file_name
