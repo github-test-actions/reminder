@@ -70,7 +70,7 @@ jobs:
         with:
           name: found_file_name
       - name: check the download file
-        runn: |
+        run: |
           pwd
           ls -la
       - name: Send email with attachment
