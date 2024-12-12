@@ -87,4 +87,4 @@ jobs:
           to: salihaansar99@gmail.com
           cc: habib_tum@ymail.com
           from: ${{ secrets.EMAIL_USERNAME }}
-          attachments: ./found_file_name/*.zip
+          attachments: ./*.zip
