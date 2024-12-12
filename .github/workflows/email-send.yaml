@@ -74,7 +74,6 @@ jobs:
           echo "Workspace contents after download:"
           ls -la
           echo "Contents of found_file_name directory:"
-          ls -la ./found_file_name
       - name: Send email with attachment
         uses: dawidd6/action-send-mail@v3
         with:
