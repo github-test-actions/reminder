@@ -69,10 +69,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: found_file_name
-      - name: check the download file
+      - name: Debug Artifact Location
         run: |
-          pwd
+          echo "Workspace contents after download:"
           ls -la
+          echo "Contents of found_file_name directory:"
+          ls -la ./found_file_name
       - name: Send email with attachment
         uses: dawidd6/action-send-mail@v3
         with:
@@ -85,4 +87,4 @@ jobs:
           to: salihaansar99@gmail.com
           cc: habib_tum@ymail.com
           from: ${{ secrets.EMAIL_USERNAME }}
-          attachments: found_file_name
+          attachments: ./found_file_name/*.zip
