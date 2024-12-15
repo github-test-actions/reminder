@@ -68,6 +68,9 @@ jobs:
           bundle exec rake db:create db:schema:load
       - name: Run Tests
         env:
+          DATABASE_TEST: reminder_test
+          DATABASE_USERNAME: habib
+          DATABASE_PASSWORD: postgres
           RAILS_ENV: test
         run: |
           rspec spec/models/reminder_spec.rb
