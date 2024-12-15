@@ -9,9 +9,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: reminder_test
-  username: habib
-  password: postgres
+  database: test_db
+  username: test_user
+  password: test_password
   host: localhost
 
 production:
