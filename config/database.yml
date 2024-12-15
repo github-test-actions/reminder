@@ -9,9 +9,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: reminder_test
-  username: habib
-  password: postgres
+  database: <%= ENV['DATABASE_TEST'] %> 
+  username: <%= ENV['DATABASE_USERNAME'] %> 
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
 
 production:
