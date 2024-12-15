@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_09_03_144739) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "reminders", force: :cascade do |t|
     t.string "title", null: false
     t.string "description"
@@ -19,7 +22,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_144739) do
     t.string "time_zone", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "jobid"
     t.index ["user_id"], name: "index_reminders_on_user_id"
   end

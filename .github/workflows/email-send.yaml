@@ -8,8 +8,22 @@ on:
 jobs:
   zip-and-email:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd="pg_isready -U postgres"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+        ports:
+          - 5432:5432
+
     steps:
-      # Step 1: Check out the repository
       - name: List Files Before
         run: |
           ls -a
@@ -38,52 +52,64 @@ jobs:
       - name: Run Rake Task
         run: |
           bundle exec rake task:print
-
+      # Step 5: Prepare the test database
+      - name: Set up test database
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:schema:load
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+        run: |
+          rspec spec/models/reminder_spec.rb
+      # Step 1: Check out the repository
       # Step 5: Zip a specific folder
       #      mkdir -p zipped
-      - name: Zip specific folder
-        run: |
-          pwd
-          zip -r ./tmp/locales.zip ./config/locales
-      - name: List Files After Zip
-        run: ls -la ./tmp
-      - name: make zip ymal
-        id: zip_file
-        run: |
-          found_file=$(ls -t ./tmp/*.zip | head -n 1)
-          echo "found_file=${found_file}" >> $GITHUB_ENV
+  #     - name: Zip specific folder
+  #       run: |
+  #         pwd
+  #         zip -r ./tmp/locales.zip ./config/locales
+  #     - name: List Files After Zip
+  #       run: ls -la ./tmp
+  #     - name: make zip ymal
+  #       id: zip_file
+  #       run: |
+  #         found_file=$(ls -t ./tmp/*.zip | head -n 1)
+  #         echo "found_file=${found_file}" >> $GITHUB_ENV
 
-      - name: Upload latest file
-        uses: actions/upload-artifact@v3
-        with:
-          name: found_file_name
-          path: ${{ env.found_file }}
+  #     - name: Upload latest file
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: found_file_name
+  #         path: ${{ env.found_file }}
 
-  just-email:
-    needs: zip-and-email
-    name: check name just email
-    runs-on: ubuntu-latest
-    steps:
-      # Step 6: Send an email with the zip file attached
-      - name: Download latest file
-        uses: actions/download-artifact@v3
-        with:
-          name: found_file_name
-      - name: Debug Artifact Location
-        run: |
-          echo "Workspace contents after download:"
-          ls -la
-          echo "Contents of found_file_name directory:"
-      - name: Send email with attachment
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: Git Repository Folder
-          body: "Attached is the zipped folder from the latest push to master."
-          to: salihaansar99@gmail.com
-          cc: habib_tum@ymail.com
-          from: ${{ secrets.EMAIL_USERNAME }}
-          attachments: ./*.zip
+  # just-email:
+  #   needs: zip-and-email
+  #   name: check name just email
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Step 6: Send an email with the zip file attached
+  #     - name: Download latest file
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: found_file_name
+  #     - name: Debug Artifact Location
+  #       run: |
+  #         echo "Workspace contents after download:"
+  #         ls -la
+  #         echo "Contents of found_file_name directory:"
+  #     - name: Send email with attachment
+  #       uses: dawidd6/action-send-mail@v3
+  #       with:
+  #         server_address: smtp.gmail.com
+  #         server_port: 587
+  #         username: ${{ secrets.EMAIL_USERNAME }}
+  #         password: ${{ secrets.EMAIL_PASSWORD }}
+  #         subject: Git Repository Folder
+  #         body: "Attached is the zipped folder from the latest push to master."
+  #         to: salihaansar99@gmail.com
+  #         cc: habib_tum@ymail.com
+  #         from: ${{ secrets.EMAIL_USERNAME }}
+  #         attachments: ./*.zip

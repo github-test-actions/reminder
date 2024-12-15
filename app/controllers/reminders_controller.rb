@@ -39,7 +39,7 @@ class RemindersController < ApplicationController
   private
 
     def update_att_and_job
-      @reminder.update_attributes(reminder_params) &&   @reminder.update_sidekiq_job
+      @reminder.update_attributes(reminder_params) && @reminder.update_sidekiq_job
     end
 
     def set_reminder

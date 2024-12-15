@@ -5,7 +5,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    puts 'fckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk'
     binding.pry
     super
   end

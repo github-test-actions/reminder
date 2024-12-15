@@ -25,6 +25,6 @@ RSpec.describe Reminder, type: :model do
   end
 
   context "Test Association" do
-    it {should  belong_to :user }
+    it { should  belong_to :user }
   end
 end

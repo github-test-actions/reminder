@@ -8,7 +8,7 @@ gem 'rails', '~> 6.0.0'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'postgresql'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -57,6 +57,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
@@ -75,7 +76,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
-  gem 'rspec-rails', '~> 3.6'
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
   gem 'database_cleaner'
