@@ -73,7 +73,7 @@ jobs:
         #   DATABASE_PASSWORD: postgres
         #   RAILS_ENV: test
         run: |
-          rspec spec/models/reminder_spec.rb
+          bundle exec rspec spec/models/reminder_spec.rb
       # Step 1: Check out the repository
       # Step 5: Zip a specific folder
       #      mkdir -p zipped
