@@ -43,12 +43,21 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.5.0
+          bundle-cache: true
       # Step: 3: Install dependency
-      - name: Install dependency
-        run: |
-          gem install bundler -v 2.3.26
-          bundle install
+      # - name: Install dependency
+      #   run: |
+      #     gem install bundler -v 2.3.26
+      #     bundle install
       # Step 5: Prepare the test database
+
+    # Step 4: Set up the database configuration
+      - name: Configure database
+        run: |
+          sed -i 's/database:.*/database: reminder_test/' config/database.yml
+          sed -i 's/username:.*/username: habib/' config/database.yml
+          sed -i 's/password:.*/password: postgres/' config/database.yml
+
       - name: Set up test database
         env:
           RAILS_ENV: test
