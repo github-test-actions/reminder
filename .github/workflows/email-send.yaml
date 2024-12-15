@@ -52,14 +52,17 @@ jobs:
       # Step 5: Prepare the test database
 
     # Step 4: Set up the database configuration
-      - name: Configure database
-        run: |
-          sed -i 's/database:.*/database: reminder_test/' config/database.yml
-          sed -i 's/username:.*/username: habib/' config/database.yml
-          sed -i 's/password:.*/password: postgres/' config/database.yml
+      # - name: Configure database
+      #   run: |
+      #     sed -i 's/database:.*/database: reminder_test/' config/database.yml
+      #     sed -i 's/username:.*/username: habib/' config/database.yml
+      #     sed -i 's/password:.*/password: postgres/' config/database.yml
 
       - name: Set up test database
         env:
+          DATABASE_TEST: reminder_test
+          DATABASE_USERNAME: habib
+          DATABASE_PASSWORD: postgres
           RAILS_ENV: test
         run: |
           bundle exec rake db:create db:schema:load
