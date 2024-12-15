@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: reminder
+  database: reminder_dev
   username: habib
   password: postgres
   host: localhost
@@ -9,15 +9,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: test_db
-  username: test_user
-  password: test_password
+  database: reminder_test
+  username: habib
+  password: postgres
   host: localhost
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: reminder_pod
+  database: reminder
   username: habib
   password: postgres
   host: localhost
