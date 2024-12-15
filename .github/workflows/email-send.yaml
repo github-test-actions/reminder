@@ -45,10 +45,10 @@ jobs:
           ruby-version: 2.5.0
           bundle-cache: true
       # Step: 3: Install dependency
-      # - name: Install dependency
-      #   run: |
-      #     gem install bundler -v 2.3.26
-      #     bundle install
+      - name: Install dependency
+        run: |
+          gem install bundler -v 2.3.26
+          bundle install
       # Step 5: Prepare the test database
 
     # Step 4: Set up the database configuration
